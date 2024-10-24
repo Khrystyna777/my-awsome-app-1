@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Weather Application</title>
+    <link rel="manifest" href="/manifest.json" />
     <link rel="stylesheet" href="styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
@@ -26,13 +27,14 @@
                 <div>
                     <h1 class="current-city" id="current-city">Paris</h1>
                     <p class="current-details">
-                        <span id="current-date"></span>, moderate rain <br />
+                        <span id="current-date"></span><br />
+                        Weather: <strong id="weather-description">Moderate rain</strong><br />
                         Humidity: <strong id="humidity">87%</strong>, Wind:
-                        <strong id="wind">7.2km/h</strong>
+                        <strong id="wind">7.2 km/h</strong>
                     </p>
                 </div>
                 <div class="current-temperature">
-                    <span class="current-temperature-icon">☀️</span>
+                    <span class="current-temperature-icon" id="weather-icon">☀️</span>
                     <span class="current-temperature-value" id="current-temperature">24</span>
                     <span class="current-temperature-unit">°C</span>
                 </div>
@@ -56,6 +58,8 @@
         const currentTemperature = document.getElementById("current-temperature");
         const humidityElement = document.getElementById("humidity");
         const windElement = document.getElementById("wind");
+        const weatherDescription = document.getElementById("weather-description");
+        const weatherIcon = document.getElementById("weather-icon");
 
         searchForm.addEventListener("submit", function (event) {
             event.preventDefault();
@@ -72,14 +76,17 @@
                     const temperature = response.data.main.temp;
                     const humidity = response.data.main.humidity;
                     const windSpeed = response.data.wind.speed;
-                    const weatherCondition = response.data.weather[0].main; 
+                    const description = response.data.weather[0].description; 
+                    const condition = response.data.weather[0].main; 
+
                     currentCity.innerText = city;
                     currentTemperature.innerText = Math.round(temperature);
                     humidityElement.innerText = `${humidity}%`;
                     windElement.innerText = `${windSpeed} km/h`;
+                    weatherDescription.innerText = description.charAt(0).toUpperCase() + description.slice(1); 
 
-                    
-                    updateWeatherIcon(weatherCondition);
+                   
+                    updateWeatherIcon(condition);
                 })
                 .catch((error) => {
                     console.error("Error fetching weather data:", error);
@@ -105,17 +112,19 @@
                     break;
                 case "Thunderstorm":
                     iconElement.innerText = "⛈️"; 
+
                     break;
                 case "Mist":
                     iconElement.innerText = "🌫️"; 
+                    
                     break;
                 default:
                     iconElement.innerText = "🌈"; 
+                    
                     break;
             }
         }
     </script>
 </body>
 </html>
-
 
