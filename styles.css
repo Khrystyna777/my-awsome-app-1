@@ -2,7 +2,7 @@ body {
   font-family: Arial, sans-serif;
   background-color: #f0f0f0; 
   margin: 0;
-  padding: 5px;
+  padding: 20px;
 }
 
 .weather-app {
@@ -17,7 +17,49 @@ body {
   border-radius: 12px; 
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
   position: relative; 
-  overflow: visible; 
+}
+
+.weather-app::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("https://www.transparenttextures.com/patterns/white-linen.png"); 
+  opacity: 0.1; 
+  border-radius: 12px;
+  pointer-events: none; 
+}
+
+header {
+  margin-bottom: 20px;
+  text-align: center; 
+}
+
+.search-input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 70%; 
+  display: inline-block; 
+}
+
+.search-button {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #ff6f61; 
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: inline-block; 
+}
+
+.search-button:hover {
+  background-color: #ff4f3d; 
 }
 
 .current-weather {
@@ -26,13 +68,13 @@ body {
 }
 
 .current-temperature {
-  font-size: 1.5em; 
+  font-size: 2em;
 }
 
 footer {
   margin-top: 20px;
   text-align: center;
-  font-size: 12px; 
+  font-size: 14px;
 }
 
 .weekly-forecast {
@@ -43,7 +85,6 @@ footer {
 
 .forecast-day {
   text-align: center;
-  background: transparent; 
 }
 
 .forecast-icon {
@@ -51,19 +92,32 @@ footer {
 }
 
 @media (max-width: 600px) {
+  body {
+      padding: 10px; 
+  }
+
+  .search-input {
+      width: 65%; 
+      margin-right: 10px; 
+  }
+
+  .search-button {
+      width: auto; 
+      margin-top: 0; 
+      display: inline-block; 
+  }
+
   .weekly-forecast {
       flex-direction: column; 
       align-items: center; 
-      padding: 0; 
   }
 
   .forecast-day {
       width: 90%; 
-      margin: 10px 0; 
-      padding: 10px; 
+      margin: 17px 0; 
   }
 
-  .search-input, .search-button {
-      font-size: 14px; 
+  .current-temperature {
+      font-size: 1.5em; 
   }
 }
