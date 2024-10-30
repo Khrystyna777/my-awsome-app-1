@@ -62,7 +62,7 @@ function displayWeeklyForecast(daily) {
     console.log(day.day.condition); 
 
     const date = new Date(day.date).toLocaleDateString("en-US", {
-      weekday: "long",
+      weekday: "short",
     });
     const temp = Math.round(day.day.avgtemp_c);
     const icon = getWeatherIcon(day.day.condition); 
@@ -95,7 +95,7 @@ function getWeatherIcon(condition) {
     "Patchy rain nearby": "🌧️", 
     "Patchy snow": "❄️",
   };
-  return icons[condition.text.trim()] || "🌈";
+  return icons[condition.text.trim()] || "☁️";
 } 
 
 function updateWeatherIcon(condition) {
