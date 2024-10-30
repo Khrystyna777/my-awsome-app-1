@@ -1,127 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Weather Application</title>
-    <link rel="manifest" href="/manifest.json" />
     <link rel="stylesheet" href="styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="weather-app">
-        <header>
-            <form id="search-form">
-                <input
-                    type="search"
-                    placeholder="Enter a city.."
-                    required
-                    class="search-input"
-                    id="search-input"
-                />
-                <input type="submit" value="Search" class="search-button" />
-            </form>
-        </header>
-        <main>
-            <div class="current-weather">
-                <div>
-                    <h1 class="current-city" id="current-city">Paris</h1>
-                    <p class="current-details">
-                        <span id="current-date"></span><br />
-                        Weather: <strong id="weather-description">Moderate rain</strong><br />
-                        Humidity: <strong id="humidity">87%</strong>, Wind:
-                        <strong id="wind">7.2 km/h</strong>
-                    </p>
-                </div>
-                <div class="current-temperature">
-                    <span class="current-temperature-icon" id="weather-icon">☀️</span>
-                    <span class="current-temperature-value" id="current-temperature">24</span>
-                    <span class="current-temperature-unit">°C</span>
-                </div>
-            </div>
-        </main>
-        <footer>
-            <p>
-                This project was coded by
-                <a href="https://github.com/Khrystyna777" target="_blank">Khrystyna Kaminska</a> and is
-                <a href="https://github.com/Khrystyna777" target="_blank"> on GitHub</a> and
-                <a href="https://app.netlify.com/user/settings" target="_blank">hosted on Netlify</a>
+      <header>
+        <form id="search-form">
+          <input
+            type="search"
+            placeholder="Enter a city.."
+            required
+            class="search-input"
+            id="search-input"
+          />
+          <input type="submit" value="Search" class="search-button" />
+        </form>
+      </header>
+      <main>
+        <div class="current-weather">
+          <div>
+            <h1 class="current-city" id="current-city">Paris</h1>
+            <p class="current-details">
+              <span id="current-date"></span><br />
+              Weather: <strong id="weather-description">Moderate rain</strong
+              ><br />
+              Humidity: <strong id="humidity">87%</strong>, Wind:
+              <strong id="wind">7.2 km/h</strong>
             </p>
-        </footer>
+          </div>
+          <div class="current-temperature">
+            <span class="current-temperature-icon" id="weather-icon">☀️</span>
+            <span class="current-temperature-value" id="current-temperature"
+              >24</span
+            >
+            <span class="current-temperature-unit">°C</span>
+          </div>
+        </div>
+        <div id="weekly-forecast" class="weekly-forecast"></div>
+      </main>
+      <footer>
+        <p>
+          This project was coded by
+          <a href="https://github.com/Khrystyna777" target="_blank"
+            >Khrystyna Kaminska</a
+          >
+          and is
+          <a href="https://github.com/Khrystyna777" target="_blank"
+            >on GitHub</a
+          >
+          and
+          <a href="https://app.netlify.com/user/settings" target="_blank"
+            >hosted on Netlify</a
+          >
+        </p>
+      </footer>
     </div>
 
-    <script>
-        const apiKey = "eb2a1618a439c09c873659b79b9e32bb";
-        const searchForm = document.getElementById("search-form");
-        const cityInput = document.getElementById("search-input");
-        const currentCity = document.getElementById("current-city");
-        const currentTemperature = document.getElementById("current-temperature");
-        const humidityElement = document.getElementById("humidity");
-        const windElement = document.getElementById("wind");
-        const weatherDescription = document.getElementById("weather-description");
-        const weatherIcon = document.getElementById("weather-icon");
-
-        searchForm.addEventListener("submit", function (event) {
-            event.preventDefault();
-            const city = cityInput.value;
-            getWeather(city);
-        });
-
-        function getWeather(city) {
-            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
-
-            axios
-                .get(url)
-                .then((response) => {
-                    const temperature = response.data.main.temp;
-                    const humidity = response.data.main.humidity;
-                    const windSpeed = response.data.wind.speed;
-                    const description = response.data.weather[0].description; 
-                    const condition = response.data.weather[0].main; 
-
-                    currentCity.innerText = city;
-                    currentTemperature.innerText = Math.round(temperature);
-                    humidityElement.innerText = `${humidity}%`;
-                    windElement.innerText = `${windSpeed} km/h`;
-                    weatherDescription.innerText = description.charAt(0).toUpperCase() + description.slice(1); 
-
-                   
-                    updateWeatherIcon(condition);
-                })
-                .catch((error) => {
-                    console.error("Error fetching weather data:", error);
-                    alert("Could not retrieve weather data. Please check the city name.");
-                });
-        }
-
-        function updateWeatherIcon(condition) {
-            const iconElement = document.querySelector(".current-temperature-icon");
-
-            switch (condition) {
-                case "Clear":
-                    iconElement.innerText = "☀️"; 
-                    break;
-                case "Clouds":
-                    iconElement.innerText = "☁️"; 
-                    break;
-                case "Rain":
-                    iconElement.innerText = "🌧️"; 
-                    break;
-                case "Snow":
-                    iconElement.innerText = "❄️"; 
-                    break;
-                case "Thunderstorm":
-                    iconElement.innerText = "⛈️"; 
-                    break;
-                case "Mist":
-                    iconElement.innerText = "🌫️"; 
-                    break;
-                default:
-                    iconElement.innerText = "🌈"; 
-                    break;
-            }
-        }
-    </script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
-
