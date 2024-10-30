@@ -87,3 +87,11 @@ footer {
 .forecast-icon {
   font-size: 2em;
 }
+@media (max-width: 600px) {
+  .weekly-forecast {
+      flex-direction: column;
+      align-items: center; 
+  }
+}
+  .forecast-day {
+      margin: 10px 0; }
