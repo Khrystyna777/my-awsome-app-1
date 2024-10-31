@@ -8,12 +8,8 @@ body {
 .weather-app {
   max-width: 600px;
   margin: auto;
-  background: linear-gradient(
-    to top right,
-    #8ecae6,
-    #ffafcc
-  ); 
-  padding: 20px;
+  background: linear-gradient(to top right, #8ecae6, #ffafcc); 
+  padding: 10px; 
   border-radius: 12px; 
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
   position: relative; 
@@ -79,16 +75,30 @@ footer {
 
 .weekly-forecast {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-around; 
   margin-top: 20px;
+  flex-wrap: wrap; 
 }
 
 .forecast-day {
   text-align: center;
+  flex: 1 1 18%; 
+  margin: 5px 0; 
 }
 
 .forecast-icon {
-  font-size: 2em;
+  font-size: 2em; 
+}
+
+.icons {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0; 
+}
+
+.icons a {
+  margin: 0 5px; 
+  font-size: 1.5em; 
 }
 
 @media (max-width: 600px) {
@@ -96,28 +106,32 @@ footer {
       padding: 10px; 
   }
 
+  .weather-app {
+      padding: 5px; 
+  }
+
   .search-input {
-      width: 65%; 
+      width: 70%; 
       margin-right: 10px; 
   }
 
   .search-button {
       width: auto; 
       margin-top: 0; 
-      display: inline-block; 
   }
 
   .weekly-forecast {
-      flex-direction: column; 
-      align-items: center; 
+      flex-direction: row; 
+      justify-content: space-around; 
+      overflow-x: auto; 
   }
 
   .forecast-day {
-      width: 90%; 
-      margin: 17px 0; 
+      flex: 1 1 18%; 
+      margin: 0 2px; 
   }
 
   .current-temperature {
-      font-size: 1.5em; 
+      font-size: 3em; 
   }
 }
